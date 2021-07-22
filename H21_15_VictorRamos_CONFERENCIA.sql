@@ -195,7 +195,7 @@ GO
 
 
 --Listar los datos de los participantes con su respectivo evento
-CREATE VIEW vListar
+CREATE VIEW vListarPE
 AS
 SELECT
 	P.NOMPAR,
@@ -210,6 +210,37 @@ FROM PARTICIPANTE AS P
 	TD.IDEVE = E.IDEVE
 GO
 
+
+--Listar los datos del evento con su respectivo ponente
+CREATE VIEW vListarEP
+AS
+SELECT
+	E.NOMEVE,
+	P.NOMPON,
+	P.APEPON
+FROM EVENTO AS E
+	INNER JOIN PONENTE AS P ON
+	E.IDPON = P.IDPON
+GO
+
+
+--Listar ticket con su respetivo nombre del vendedor y cliente
+CREATE VIEW vListarTicket
+AS
+SELECT
+	T.IDTIC,
+	P.NOMPAR,
+	P.APEPAR,
+	V.NOMVEN,
+	V.APEVEN,
+	T.FECHTIC,
+	T.IMPTIC
+FROM TICKET AS T
+	INNER JOIN PARTICIPANTE AS P ON
+	T.IDPAR = P.IDPAR
+	INNER JOIN VENDEDOR AS V ON
+	T.IDVEN = V.IDVEN
+GO
 
 
 --Procedimiento almacenado para Insertar Participantes y que no haya duplicado de DNI
